@@ -1,13 +1,14 @@
-'use client'
+"use client"
 
 import { useState, useEffect, useRef } from "react";
 import {  Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 
 export default function Workout() {
-  const isClient = typeof window !== "undefined";
   const router = useRouter();
   const timerRef = useRef<number | NodeJS.Timeout>(0);
+
+  const isClient = typeof window !== "undefined";
 
   const [time, setTime] = useState(() => {
     if (!isClient) return 0;
@@ -31,7 +32,7 @@ export default function Workout() {
   });
   
   const [phases, setPhases] = useState(() => {
-    if (!isClient) return '';
+    if (!isClient) return [];
     const savedPhases = localStorage?.getItem("phases");
     return savedPhases
       ? JSON.parse(savedPhases)
@@ -79,7 +80,7 @@ export default function Workout() {
       <Flex align="center" p={4} gap="4" direction="column">
         <Heading>Parabéns! 🎉</Heading>
         <Text>Tempo: {formatTime(time)}</Text>
-        {phases.map((phase: { name: string, phaseTime: number }, idx: number) => (
+        {phases?.map((phase: { name: string, phaseTime: number }, idx: number) => (
           <Text key={idx}>
             {phase.name}: {formatTime(phase.phaseTime - (phases[idx - 1]?.phaseTime || 0))}
           </Text>
@@ -102,7 +103,7 @@ export default function Workout() {
         </Button>
       ) : (
         <Box>
-          {[1, 5, 10, 20].map((value) => (
+          {[1, 5, 10, 20]?.map((value) => (
             <Button
               key={value}
               colorScheme="teal"
