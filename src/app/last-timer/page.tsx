@@ -24,7 +24,7 @@ export default function LastTimer() {
     };
 
       return (
-        <Flex align="center" p={4} gap="4" direction="column" backgroundColor="blackAlpha.950" w="18rem">
+        <Flex align="center" p={4} gap="4" direction="column" backgroundColor="blackAlpha.950" w="22rem" minW='20rem'>
           {Boolean(!time && !currentUser && !phases) ? <Heading>Você Não tem registros ainda.</Heading> :
           (
             <>

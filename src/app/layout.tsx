@@ -19,7 +19,7 @@ export default function RootLayout({
             backgroundSize="cover"
             backgroundPosition="center"
           >
-            <AbsoluteCenter w='100%'>
+            <AbsoluteCenter w='100%' h='100vh'>
               {children}
             </AbsoluteCenter>
           </Container>
