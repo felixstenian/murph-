@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react";
-import {  Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import {  Box, Button, Flex, Heading, Text, Image } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 
 export default function Workout() {
@@ -37,11 +37,11 @@ export default function Workout() {
     return savedPhases
       ? JSON.parse(savedPhases)
       : [
-          { name: "1 Mile Run", totalReps: 1, completedReps: 0, phaseTime: 0 },
+          { name: "1.6 KM Run", totalReps: 1, completedReps: 0, phaseTime: 0 },
           { name: "Pull-Ups", totalReps: 100, completedReps: 0, phaseTime: 0 },
           { name: "Push-Ups", totalReps: 200, completedReps: 0, phaseTime: 0 },
           { name: "Air Squats", totalReps: 300, completedReps: 0, phaseTime: 0 },
-          { name: "1 Mile Run", totalReps: 1, completedReps: 0, phaseTime: 0 },
+          { name: "1.6 KM Run", totalReps: 1, completedReps: 0, phaseTime: 0 },
         ];
   });
 
@@ -77,7 +77,7 @@ export default function Workout() {
   if (phaseIndex >= phases.length) {
     clearInterval(timerRef.current);
     return (
-      <Flex align="center" p={4} gap="4" direction="column">
+      <Flex align="center" p={4} gap="4" direction="column" backgroundColor="blackAlpha.950" w="60%">
         <Heading>Parabéns! 🎉</Heading>
         <Text>Tempo: {formatTime(time)}</Text>
         {phases?.map((phase: { name: string, phaseTime: number }, idx: number) => (
@@ -90,12 +90,21 @@ export default function Workout() {
     );
   }
 
+  const getSrcImagesWorkouts = () => {
+    if (phases[phaseIndex].name.includes("Run")) return 'https://media.tenor.com/tscJ0nIN-4UAAAAM/degabotuviceoyunageli%CC%87nceka%C3%A7argi%CC%87bi%CC%87.gif'
+    if (phases[phaseIndex].name.includes("Pull-Ups")) return 'https://media4.giphy.com/media/LDZZolICZSt3nSx9IM/giphy.gif?cid=6c09b952xt36oi2o785c35oigq99kuj86yzooes0p2s6jx5h&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g'
+    if (phases[phaseIndex].name.includes("Push-Ups")) return 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGxlb3pwbm5wYzN6eW5vZnI3YWhrYmQxeXB4ZWJ2Zmk1aXh0dXBwMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3pY8FQP9uMtDKXkYqX/giphy.webp'
+    if (phases[phaseIndex].name.includes("Air Squats")) return 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGk3cDBpbnU3dzRzbzh5czBna3k4bWd3YWR2ZWw1eHdnNHl4Z3poZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/aT4gLVz0A9ROxqLgI1/giphy.webp'
+  };
+
   return (
-    <Flex align="center" p={4} gap="4" direction="column">
+    <Flex align="center" p={4} gap="4" direction="column" backgroundColor="blackAlpha.950" w="60%">
       <Heading>{phases[phaseIndex].name}</Heading>
       <Text>Tempo: {formatTime(time)}</Text>
       <Text>
-        Repetições restantes: {phases[phaseIndex].totalReps - phases[phaseIndex].completedReps}
+        {phases[phaseIndex].name.includes("Run") ? ( '1.6 km Restante' ) : (
+          <Text>Repetições restantes: {phases[phaseIndex].totalReps - phases[phaseIndex].completedReps}</Text>
+        )}
       </Text>
       {phases[phaseIndex].name.includes("Run") ? (
         <Button colorScheme="blue" onClick={() => handleRepCompletion(1)}>
@@ -115,6 +124,7 @@ export default function Workout() {
           ))}
         </Box>
       )}
+      <Image src={getSrcImagesWorkouts()} alt="workout" />
     </Flex>
   );
 }
