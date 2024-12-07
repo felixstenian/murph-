@@ -2,10 +2,12 @@
 
 import { Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
+import useScrollToTop from "../hooks/useScrollToTop";
 
 export default function LastTimer() {
     const router = useRouter();
-    
+    useScrollToTop();
+
     const isClient = typeof window !== "undefined";
     if (!isClient) return <></>
 
@@ -25,7 +27,7 @@ export default function LastTimer() {
 
       return (
         <Flex align="center" p={4} gap="4" direction="column" backgroundColor="blackAlpha.950" w="22rem" minW='20rem'>
-          {Boolean(!time && !currentUser && !phases) ? <Heading>Você Não tem registros ainda.</Heading> :
+          {isClient && Boolean(!time && !currentUser && !phases) ? <Heading>Você Não tem registros ainda.</Heading> :
           (
             <>
             <Heading>
