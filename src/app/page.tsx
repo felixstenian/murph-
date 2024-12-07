@@ -13,10 +13,10 @@ export default function Home() {
       gap="4" 
       mt={350}
       direction="column"
-      backgroundColor="blackAlpha.800"
-      w="60%"
+      backgroundColor="blackAlpha.950"
+      w="20rem"
+      maxW="30rem"
     >
-      {/* <Heading>WOD Murph</Heading> */}
       <Button colorScheme='blue' onClick={() => router.push('/register-workout')}>Start</Button>
       <Button colorScheme='teal' onClick={() => router.push('/last-timer')}>Last timer</Button>
     </Flex>
