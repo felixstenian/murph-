@@ -15,7 +15,7 @@ export default function Workout() {
   });
 
   // TODO: create util
-  const formatTime = (seconds: any) => {
+  const formatTime = (seconds: number) => {
     const hours = String(Math.floor(seconds / 3600)).padStart(2, '0');
     const minutes = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
     const secs = String(seconds % 60).padStart(2, '0');
@@ -52,14 +52,14 @@ export default function Workout() {
     }
 
     return () => clearInterval(timerRef.current);
-  }, [phaseIndex]);
+  }, [phaseIndex, phases.length]);
 
   useEffect(() => {
     localStorage.setItem("phaseIndex", String(phaseIndex));
     localStorage.setItem("phases", JSON.stringify(phases));
   }, [phaseIndex, phases]);
 
-  const handleRepCompletion = (reps: any) => {
+  const handleRepCompletion = (reps: number) => {
     const updatedPhases = [...phases];
     updatedPhases[phaseIndex].completedReps += reps;
     if (updatedPhases[phaseIndex].completedReps >= updatedPhases[phaseIndex].totalReps) {
@@ -75,7 +75,7 @@ export default function Workout() {
       <Flex align="center" p={4} gap="4" direction="column">
         <Heading>Parabéns! 🎉</Heading>
         <Text>Tempo: {formatTime(time)}</Text>
-        {phases.map((phase: any, idx: any) => (
+        {phases.map((phase: { name: string, phaseTime: number }, idx: number) => (
           <Text key={idx}>
             {phase.name}: {formatTime(phase.phaseTime - (phases[idx - 1]?.phaseTime || 0))}
           </Text>
