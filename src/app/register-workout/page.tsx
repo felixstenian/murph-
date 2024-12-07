@@ -26,7 +26,7 @@ export default function RegisterWorkout() {
     }
 
     return (
-        <Flex p={4} gap="4" direction="column" backgroundColor="blackAlpha.950" w="60%">
+        <Flex p={4} gap="4" direction="column" backgroundColor="blackAlpha.950" w="20rem">
             <Heading>Registro de treino</Heading>
             <label>Nome</label>
             <Input value={name} onChange={(e) => setName(e.target.value)} placeholder='Digite seu nome' />

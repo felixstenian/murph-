@@ -16,6 +16,8 @@ export default function Workout() {
     return savedTime ? parseInt(savedTime, 10) : 0;
   });
 
+  const currentUser = JSON.parse(localStorage.getItem("currentUser") ?? '');
+
   // TODO: create util
   const formatTime = (seconds: number) => {
     if (!isClient) return 0;
@@ -78,8 +80,11 @@ export default function Workout() {
     clearInterval(timerRef.current);
     return (
       <Flex align="center" p={4} gap="4" direction="column" backgroundColor="blackAlpha.950" w="60%">
-        <Heading>Parabéns! 🎉</Heading>
-        <Text>Tempo: {formatTime(time)}</Text>
+        <Heading>
+        <Text textStyle="2xl">{currentUser?.name},</Text>
+          Parabéns! 🎉
+        </Heading>
+        <Text>Tempo Total: {formatTime(time)}</Text>
         {phases?.map((phase: { name: string, phaseTime: number }, idx: number) => (
           <Text key={idx}>
             {phase.name}: {formatTime(phase.phaseTime - (phases[idx - 1]?.phaseTime || 0))}
@@ -98,7 +103,7 @@ export default function Workout() {
   };
 
   return (
-    <Flex align="center" p={4} gap="4" direction="column" backgroundColor="blackAlpha.950" w="60%">
+    <Flex align="center" p={4} gap="4" direction="column" backgroundColor="blackAlpha.950" w="22rem">
       <Heading>{phases[phaseIndex].name}</Heading>
       <Text>Tempo: {formatTime(time)}</Text>
       <Text>
