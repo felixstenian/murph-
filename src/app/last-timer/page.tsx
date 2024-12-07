@@ -1,10 +1,14 @@
-'use client'
+"use client"
 
 import { Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 
 export default function LastTimer() {
     const router = useRouter();
+    
+    const isClient = typeof window !== "undefined";
+    if (!isClient) return <></>
+
 
     const time = localStorage.getItem("workoutTime");
 

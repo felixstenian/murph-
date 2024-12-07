@@ -1,3 +1,5 @@
+"use client"
+
 import { Provider } from "@/components/ui/provider"
 import { AbsoluteCenter, Container } from "@chakra-ui/react";
 
