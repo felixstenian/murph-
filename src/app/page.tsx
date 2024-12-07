@@ -16,6 +16,7 @@ export default function Home() {
       backgroundColor="blackAlpha.950"
       w="20rem"
       maxW="30rem"
+      minW='20rem'
     >
       <Button colorScheme='blue' onClick={() => router.push('/register-workout')}>Start</Button>
       <Button colorScheme='teal' onClick={() => router.push('/last-timer')}>Last timer</Button>
