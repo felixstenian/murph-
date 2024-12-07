@@ -4,12 +4,15 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Heading, Input, Flex } from '@chakra-ui/react';
 import { Button } from '@/components/ui/button';
+import useScrollToTop from '../hooks/useScrollToTop';
 
 export default function RegisterWorkout() {
     const [name, setName] = useState('');
     // const [format, setFormat] = useState('unparttitioned');
 
     const router = useRouter();
+    
+    useScrollToTop();
 
     const resetData = () => {
         localStorage.removeItem("workoutTime");

@@ -3,13 +3,15 @@
 import { useState, useEffect, useRef } from "react";
 import {  Box, Button, Flex, Heading, Text, Image } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
+import useScrollToTop from "../hooks/useScrollToTop";
 
 export default function Workout() {
   const router = useRouter();
   const timerRef = useRef<number | NodeJS.Timeout>(0);
 
   const isClient = typeof window !== "undefined";
-
+  useScrollToTop();
+  
   const [time, setTime] = useState(() => {
     if (!isClient) return 0;
     const savedTime = localStorage?.getItem("workoutTime");
